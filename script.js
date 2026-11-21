@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
 
         window.addEventListener("load", function () {
-            setTimeout(hideLoader, 2000);
+            setTimeout(hideLoader, 1500);
         }, { once: true });
 
     }
