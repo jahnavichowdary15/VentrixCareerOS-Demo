@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (loader.parentNode) {
                     loader.remove();
                 }
-            }, 750);
+            }, 1000);
         }
 
         function updateProgress() {
