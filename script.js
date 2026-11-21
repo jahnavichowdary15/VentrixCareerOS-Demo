@@ -28,13 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Show popup when website links are clicked
-    document.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            showLaunchPopup();
-        });
+   document.querySelectorAll("a").forEach(function (link) {
+
+    link.addEventListener("click", function (event) {
+
+        // Allow WhatsApp links to open normally
+        if (link.classList.contains("whatsapp-link")) {
+            return;
+        }
+
+        event.preventDefault();
+        showLaunchPopup();
+
     });
 
+});
     // Close popup buttons
     if (closeLaunch) {
         closeLaunch.addEventListener("click", hideLaunchPopup);
