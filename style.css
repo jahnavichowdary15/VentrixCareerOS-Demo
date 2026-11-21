@@ -917,23 +917,26 @@ body {
 /* LAUNCHING SOON BADGE */
 
 .launching-soon-label {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     gap: 8px;
     padding: 8px 15px;
-    margin-bottom: 18px;
-    border: 1px solid rgba(37, 99, 235, 0.25);
+    margin-bottom: 14px;
+    border: 1px solid #c7d8ff;
     border-radius: 30px;
     background: #eaf1ff;
     color: #2563eb;
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 1.5px;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .launching-dot {
     width: 8px;
     height: 8px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: #2563eb;
     animation: launchingPulse 1.5s infinite;
