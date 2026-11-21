@@ -39,3 +39,18 @@ document.addEventListener("keydown", function(event) {
         hideLaunchPopup();
     }
 });
+// VentrixCareerOS Loading Screen
+window.addEventListener("load", function () {
+    const loader = document.getElementById("pageLoader");
+
+    if (loader) {
+        setTimeout(function () {
+            loader.classList.add("loader-hidden");
+
+            setTimeout(function () {
+                loader.remove();
+            }, 650);
+
+        }, 1000);
+    }
+});
