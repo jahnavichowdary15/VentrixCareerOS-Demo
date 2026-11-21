@@ -905,3 +905,12 @@ a {
         margin-bottom: 30px;
     }
 }
+body {
+    overflow-x: hidden;
+}
+
+.page-loader.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}

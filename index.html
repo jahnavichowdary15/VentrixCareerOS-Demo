@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +15,65 @@
 
 <body>
 
-    <!-- HEADER -->
+    <!-- ======================================
+         VENTRIX CAREEROS LOADING SCREEN
+    ======================================= -->
+
+    <div id="pageLoader" class="page-loader">
+
+        <div class="loader-content">
+
+            <div class="loader-brand">
+                <div class="loader-brand-icon">V</div>
+
+                <div class="loader-brand-name">
+                    Ventrix<span>CareerOS</span>
+                </div>
+            </div>
+
+            <div class="orbit-animation">
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit orbit-three"></div>
+
+                <div class="orbit-center"></div>
+
+                <span class="orbit-dot dot-one"></span>
+                <span class="orbit-dot dot-two"></span>
+                <span class="orbit-dot dot-three"></span>
+
+            </div>
+
+            <div class="loading-message">
+                Preparing your career workspace
+            </div>
+
+            <div class="loading-progress">
+                <div
+                    class="loading-progress-bar"
+                    id="loadingProgressBar">
+                </div>
+            </div>
+
+            <button
+                type="button"
+                id="skipLoader"
+                class="skip-loader">
+                Skip
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
     <header class="header">
+
         <div class="container navbar">
 
             <a href="#" class="logo">
@@ -35,16 +94,23 @@
             </div>
 
         </div>
+
     </header>
 
 
-    <!-- HERO SECTION -->
+    <!-- ======================================
+         HERO SECTION
+    ======================================= -->
+
     <section class="hero">
+
         <div class="container hero-grid">
 
             <div class="hero-content">
 
-                <span class="eyebrow">YOUR AI CAREER WORKSPACE</span>
+                <span class="eyebrow">
+                    YOUR AI CAREER WORKSPACE
+                </span>
 
                 <h1>
                     Find the right job.
@@ -58,8 +124,13 @@
                 </p>
 
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Find Your Next Job</a>
-                    <a href="#" class="btn btn-outline">Explore AI Tools</a>
+                    <a href="#" class="btn btn-primary">
+                        Find Your Next Job
+                    </a>
+
+                    <a href="#" class="btn btn-outline">
+                        Explore AI Tools
+                    </a>
                 </div>
 
                 <div class="hero-note">
@@ -70,15 +141,22 @@
             </div>
 
             <div class="hero-image">
-                <img src="background.jpeg" alt="Career Workspace Preview">
+                <img
+                    src="background.jpeg"
+                    alt="Career Workspace Preview">
             </div>
 
         </div>
+
     </section>
 
 
-    <!-- STATISTICS -->
+    <!-- ======================================
+         STATISTICS
+    ======================================= -->
+
     <section class="stats">
+
         <div class="container stats-grid">
 
             <div>
@@ -102,11 +180,16 @@
             </div>
 
         </div>
+
     </section>
 
 
-    <!-- JOBS SECTION -->
+    <!-- ======================================
+         JOBS SECTION
+    ======================================= -->
+
     <section class="section">
+
         <div class="container">
 
             <div class="section-heading">
@@ -139,12 +222,18 @@
                 </div>
 
             </div>
+
         </div>
+
     </section>
 
 
-    <!-- AI TOOLS -->
+    <!-- ======================================
+         AI TOOLS
+    ======================================= -->
+
     <section class="section tools-section">
+
         <div class="container">
 
             <div class="section-heading">
@@ -198,12 +287,18 @@
                 </div>
 
             </div>
+
         </div>
+
     </section>
 
 
-    <!-- HOW IT WORKS -->
+    <!-- ======================================
+         HOW IT WORKS
+    ======================================= -->
+
     <section class="section">
+
         <div class="container">
 
             <div class="section-heading">
@@ -232,12 +327,18 @@
                 </div>
 
             </div>
+
         </div>
+
     </section>
 
 
-    <!-- DASHBOARD -->
+    <!-- ======================================
+         DASHBOARD
+    ======================================= -->
+
     <section class="section dashboard-section">
+
         <div class="container dashboard-content">
 
             <div>
@@ -249,7 +350,9 @@
                     manage your profile and monitor your career progress.
                 </p>
 
-                <a href="#" class="btn btn-primary">Explore Dashboard</a>
+                <a href="#" class="btn btn-primary">
+                    Explore Dashboard
+                </a>
             </div>
 
             <div class="dashboard-box">
@@ -260,11 +363,16 @@
             </div>
 
         </div>
+
     </section>
 
 
-    <!-- CALL TO ACTION -->
+    <!-- ======================================
+         CALL TO ACTION
+    ======================================= -->
+
     <section class="cta">
+
         <div class="container">
 
             <h2>Your Next Career Move Starts Here.</h2>
@@ -273,14 +381,21 @@
                 Get ready for a smarter way to search, prepare and grow.
             </p>
 
-            <a href="#" class="btn btn-light">Join VentrixCareerOS</a>
+            <a href="#" class="btn btn-light">
+                Join VentrixCareerOS
+            </a>
 
         </div>
+
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- ======================================
+         FOOTER
+    ======================================= -->
+
     <footer class="footer">
+
         <div class="container footer-grid">
 
             <div>
@@ -313,19 +428,30 @@
         <div class="copyright">
             © 2026 VentrixCareerOS. All rights reserved.
         </div>
+
     </footer>
 
 
-    <!-- LAUNCHING SOON POPUP -->
+    <!-- ======================================
+         LAUNCHING SOON POPUP
+    ======================================= -->
+
     <div class="launch-modal" id="launchModal">
 
         <div class="launch-box">
 
-            <button class="launch-close" id="closeLaunch">&times;</button>
+            <button
+                class="launch-close"
+                id="closeLaunch"
+                type="button">
+                &times;
+            </button>
 
             <div class="launch-icon">🚀</div>
 
-            <span class="launch-badge">SOMETHING EXCITING IS COMING</span>
+            <span class="launch-badge">
+                SOMETHING EXCITING IS COMING
+            </span>
 
             <h2>Launching Soon!</h2>
 
@@ -339,7 +465,10 @@
                 Your smarter career journey is almost here!
             </p>
 
-            <button class="launch-button" id="launchOkay">
+            <button
+                class="launch-button"
+                id="launchOkay"
+                type="button">
                 Got it!
             </button>
 
@@ -348,48 +477,11 @@
     </div>
 
 
+    <!-- ======================================
+         WEBSITE JAVASCRIPT
+    ======================================= -->
+
     <script src="script.js"></script>
 
 </body>
-
-<!-- VENTRIX CAREEROS LOADING SCREEN -->
-<div id="pageLoader" class="page-loader">
-
-    <div class="loader-content">
-
-        <div class="loader-brand">
-            <div class="loader-brand-icon">V</div>
-            <div class="loader-brand-name">
-                Ventrix<span>CareerOS</span>
-            </div>
-        </div>
-
-        <div class="orbit-animation">
-            <div class="orbit orbit-one"></div>
-            <div class="orbit orbit-two"></div>
-            <div class="orbit orbit-three"></div>
-
-            <div class="orbit-center"></div>
-
-            <span class="orbit-dot dot-one"></span>
-            <span class="orbit-dot dot-two"></span>
-            <span class="orbit-dot dot-three"></span>
-        </div>
-
-        <div class="loading-message">
-            Preparing your career workspace
-        </div>
-
-        <div class="loading-progress">
-            <div class="loading-progress-bar" id="loadingProgressBar"></div>
-        </div>
-
-        <button type="button" id="skipLoader" class="skip-loader">
-            Skip
-        </button>
-
-    </div>
-
-</div>
-
 </html>
