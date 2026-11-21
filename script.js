@@ -71,54 +71,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    
-/* ======================================
-   VENTRIX CAREEROS LOADING CONTROLLER
-====================================== */
+    /* =====================================
+       LOADING SCREEN CONTROLLER
+    ===================================== */
 
-(function () {
     const loader = document.getElementById("pageLoader");
     const skipButton = document.getElementById("skipLoader");
     const progressBar = document.getElementById("loadingProgressBar");
 
     if (!loader) return;
 
-    const MIN_LOADING_TIME = 3000;
-    const START_TIME = Date.now();
-
-    let finished = false;
-    let pageLoaded = document.readyState === "complete";
-    let animationFrame;
-
-    function updateProgress() {
-        if (finished) return;
-
-        const elapsed = Date.now() - START_TIME;
-
-        // Smooth, consistent progress over 3 seconds
-        const progress = Math.min(
-            (elapsed / MIN_LOADING_TIME) * 100,
-            100
-        );
-
-        if (progressBar) {
-            progressBar.style.width = progress + "%";
-        }
-
-        if (elapsed >= MIN_LOADING_TIME && pageLoaded) {
-            hideLoader();
-            return;
-        }
-
-        animationFrame = requestAnimationFrame(updateProgress);
-    }
+    let loaderClosed = false;
+    let progress = 0;
+    let progressTimer = null;
+    let fallbackTimer = null;
 
     function hideLoader() {
-        if (finished) return;
 
-        finished = true;
+        if (loaderClosed) return;
 
-        cancelAnimationFrame(animationFrame);
+        loaderClosed = true;
+
+        clearInterval(progressTimer);
+        clearTimeout(fallbackTimer);
 
         if (progressBar) {
             progressBar.style.width = "100%";
@@ -126,28 +101,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
         loader.classList.add("loader-hidden");
 
+        document.body.style.overflow = "";
+
         setTimeout(function () {
+
             if (loader.parentNode) {
                 loader.remove();
             }
+
         }, 750);
+
     }
 
-    window.addEventListener("load", function () {
-        pageLoaded = true;
+    // Animate progress bar
+    progressTimer = setInterval(function () {
 
-        const elapsed = Date.now() - START_TIME;
-        const remaining = MIN_LOADING_TIME - elapsed;
+        if (progress < 90) {
 
-        if (remaining <= 0) {
-            hideLoader();
+            progress = Math.min(progress + 3, 90);
+
+            if (progressBar) {
+                progressBar.style.width = progress + "%";
+            }
+
         }
-    }, { once: true });
 
+    }, 150);
+
+    // Skip button
     if (skipButton) {
         skipButton.addEventListener("click", hideLoader);
     }
 
-    animationFrame = requestAnimationFrame(updateProgress);
+    // Hide when page and its resources finish loading
+    if (document.readyState === "complete") {
 
-})();
+        setTimeout(hideLoader, 500);
+
+    } else {
+
+        window.addEventListener("load", function () {
+            setTimeout(hideLoader, 1000);
+        }, { once: true });
+
+    }
+
+    // Emergency fallback
+    fallbackTimer = setTimeout(hideLoader, 5000);
+
+});
