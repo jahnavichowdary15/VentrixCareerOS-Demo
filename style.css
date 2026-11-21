@@ -954,6 +954,7 @@ body {
     }
 }
 
+
 /* ======================================
    WHATSAPP INTEGRATION BUTTONS
 ====================================== */
@@ -976,9 +977,14 @@ body {
 }
 
 .whatsapp-button svg {
-    width: 21px;
-    height: 21px;
+    width: 22px;
+    height: 22px;
+    display: block;
     flex-shrink: 0;
+}
+
+.whatsapp-button span {
+    color: #ffffff;
 }
 
 .whatsapp-button:hover {
@@ -988,18 +994,23 @@ body {
     box-shadow: 0 5px 15px rgba(37, 211, 102, 0.25);
 }
 
-/* Header WhatsApp button */
+/* HEADER WHATSAPP BUTTON */
+
 .nav-buttons .whatsapp-button {
     padding: 11px 15px;
+    min-height: 42px;
 }
 
-/* Hero WhatsApp button */
+/* HERO WHATSAPP BUTTON */
+
 .hero-buttons .whatsapp-button {
     margin-top: 0;
 }
 
-/* Mobile layout */
+/* MOBILE RESPONSIVENESS */
+
 @media (max-width: 768px) {
+
     .nav-buttons .whatsapp-button {
         width: 100%;
     }
@@ -1007,4 +1018,5 @@ body {
     .hero-buttons .whatsapp-button {
         width: 100%;
     }
+
 }
