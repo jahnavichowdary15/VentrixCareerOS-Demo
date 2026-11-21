@@ -29,17 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Show popup when website links are clicked
     document.querySelectorAll("a").forEach(function (link) {
-
         link.addEventListener("click", function (event) {
-
             event.preventDefault();
             showLaunchPopup();
-
         });
-
     });
 
-    // Close popup button
+    // Close popup buttons
     if (closeLaunch) {
         closeLaunch.addEventListener("click", hideLaunchPopup);
     }
@@ -50,103 +46,101 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Close popup by clicking outside
     if (launchModal) {
-
         launchModal.addEventListener("click", function (event) {
-
             if (event.target === launchModal) {
                 hideLaunchPopup();
             }
-
         });
-
     }
 
     // Close popup using Escape
     document.addEventListener("keydown", function (event) {
-
         if (event.key === "Escape") {
             hideLaunchPopup();
         }
-
     });
 
 
-    /* =====================================
-       LOADING SCREEN CONTROLLER
-    ===================================== */
+    /* ======================================
+       VENTRIX CAREEROS LOADING CONTROLLER
+    ====================================== */
 
     const loader = document.getElementById("pageLoader");
     const skipButton = document.getElementById("skipLoader");
     const progressBar = document.getElementById("loadingProgressBar");
 
-    if (!loader) return;
+    if (loader) {
 
-    let loaderClosed = false;
-    let progress = 0;
-    let progressTimer = null;
-    let fallbackTimer = null;
+        const MIN_LOADING_TIME = 3000;
+        const START_TIME = Date.now();
 
-    function hideLoader() {
+        let finished = false;
+        let pageLoaded = document.readyState === "complete";
+        let animationFrame = null;
 
-        if (loaderClosed) return;
+        function hideLoader() {
+            if (finished) return;
 
-        loaderClosed = true;
+            finished = true;
 
-        clearInterval(progressTimer);
-        clearTimeout(fallbackTimer);
-
-        if (progressBar) {
-            progressBar.style.width = "100%";
-        }
-
-        loader.classList.add("loader-hidden");
-
-        document.body.style.overflow = "";
-
-        setTimeout(function () {
-
-            if (loader.parentNode) {
-                loader.remove();
+            if (animationFrame !== null) {
+                cancelAnimationFrame(animationFrame);
             }
 
-        }, 750);
+            if (progressBar) {
+                progressBar.style.width = "100%";
+            }
 
-    }
+            loader.classList.add("loader-hidden");
 
-    // Animate progress bar
-    progressTimer = setInterval(function () {
+            setTimeout(function () {
+                if (loader.parentNode) {
+                    loader.remove();
+                }
+            }, 750);
+        }
 
-        if (progress < 90) {
+        function updateProgress() {
+            if (finished) return;
 
-            progress = Math.min(progress + 3, 90);
+            const elapsed = Date.now() - START_TIME;
+
+            // Smooth, consistent progress over 3 seconds
+            const progress = Math.min(
+                (elapsed / MIN_LOADING_TIME) * 100,
+                100
+            );
 
             if (progressBar) {
                 progressBar.style.width = progress + "%";
             }
 
+            if (elapsed >= MIN_LOADING_TIME && pageLoaded) {
+                hideLoader();
+                return;
+            }
+
+            animationFrame = requestAnimationFrame(updateProgress);
         }
 
-    }, 150);
-
-    // Skip button
-    if (skipButton) {
-        skipButton.addEventListener("click", hideLoader);
-    }
-
-    // Hide when page and its resources finish loading
-    if (document.readyState === "complete") {
-
-        setTimeout(hideLoader, 500);
-
-    } else {
-
+        // Wait for the complete page to load
         window.addEventListener("load", function () {
-            setTimeout(hideLoader, 1000);
+            pageLoaded = true;
+
+            const elapsed = Date.now() - START_TIME;
+
+            if (elapsed >= MIN_LOADING_TIME) {
+                hideLoader();
+            }
         }, { once: true });
 
+        // Skip button
+        if (skipButton) {
+            skipButton.addEventListener("click", hideLoader);
+        }
+
+        // Start progress animation
+        animationFrame = requestAnimationFrame(updateProgress);
     }
 
-    // Emergency fallback
-    fallbackTimer = setTimeout(hideLoader, 500);
-
-});
+}); // IMPORTANT: closes DOMContentLoaded
