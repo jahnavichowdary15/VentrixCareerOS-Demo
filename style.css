@@ -914,3 +914,39 @@ body {
     visibility: hidden;
     pointer-events: none;
 }
+/* LAUNCHING SOON BADGE */
+
+.launching-soon-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(37, 99, 235, 0.25);
+    border-radius: 30px;
+    background: #eaf1ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.launching-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2563eb;
+    animation: launchingPulse 1.5s infinite;
+}
+
+@keyframes launchingPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(1.4);
+    }
+}
