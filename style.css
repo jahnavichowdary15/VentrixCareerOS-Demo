@@ -971,12 +971,14 @@ body {
     font-weight: 700;
     text-decoration: none !important;
     border: 1px solid #25D366;
-    transition: all 0.25s ease;
     white-space: nowrap;
+    transition: all 0.25s ease;
 }
 
-.whatsapp-button span {
-    font-size: 19px;
+.whatsapp-button svg {
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
 }
 
 .whatsapp-button:hover {
