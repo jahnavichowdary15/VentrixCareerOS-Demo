@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (loader) {
 
-        const MIN_LOADING_TIME = 1000;
+        const MIN_LOADING_TIME = 500;
         const START_TIME = Date.now();
 
         let finished = false;
