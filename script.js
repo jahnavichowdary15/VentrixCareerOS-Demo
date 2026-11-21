@@ -1,66 +1,99 @@
-const launchModal = document.getElementById("launchModal");
-const closeLaunch = document.getElementById("closeLaunch");
-const launchOkay = document.getElementById("launchOkay");
 
-// Show popup
-function showLaunchPopup() {
-    launchModal.classList.add("active");
-    document.body.style.overflow = "hidden";
-}
+/* =========================================
+   VENTRIX CAREEROS - WEBSITE JAVASCRIPT
+========================================= */
 
-// Close popup
-function hideLaunchPopup() {
-    launchModal.classList.remove("active");
-    document.body.style.overflow = "";
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-// Show popup whenever a link is clicked
-document.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", function(event) {
-        event.preventDefault();
-        showLaunchPopup();
+    /* =====================================
+       LAUNCHING SOON POPUP
+    ===================================== */
+
+    const launchModal = document.getElementById("launchModal");
+    const closeLaunch = document.getElementById("closeLaunch");
+    const launchOkay = document.getElementById("launchOkay");
+
+    function showLaunchPopup() {
+        if (!launchModal) return;
+
+        launchModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+    function hideLaunchPopup() {
+        if (!launchModal) return;
+
+        launchModal.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    // Show popup when website links are clicked
+    document.querySelectorAll("a").forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            event.preventDefault();
+            showLaunchPopup();
+
+        });
+
     });
-});
 
-// Close button
-closeLaunch.addEventListener("click", hideLaunchPopup);
-launchOkay.addEventListener("click", hideLaunchPopup);
-
-// Close when clicking outside the popup
-launchModal.addEventListener("click", function(event) {
-    if (event.target === launchModal) {
-        hideLaunchPopup();
+    // Close popup button
+    if (closeLaunch) {
+        closeLaunch.addEventListener("click", hideLaunchPopup);
     }
-});
 
-// Close when pressing Escape
-document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") {
-        hideLaunchPopup();
+    if (launchOkay) {
+        launchOkay.addEventListener("click", hideLaunchPopup);
     }
-});
 
-/* ======================================
-   VENTRIX CAREEROS LOADING CONTROLLER
-====================================== */
+    // Close popup by clicking outside
+    if (launchModal) {
 
-(function () {
+        launchModal.addEventListener("click", function (event) {
+
+            if (event.target === launchModal) {
+                hideLaunchPopup();
+            }
+
+        });
+
+    }
+
+    // Close popup using Escape
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "Escape") {
+            hideLaunchPopup();
+        }
+
+    });
+
+
+    /* =====================================
+       LOADING SCREEN CONTROLLER
+    ===================================== */
+
     const loader = document.getElementById("pageLoader");
     const skipButton = document.getElementById("skipLoader");
     const progressBar = document.getElementById("loadingProgressBar");
 
     if (!loader) return;
 
-    let finished = false;
+    let loaderClosed = false;
     let progress = 0;
-    let progressInterval;
+    let progressTimer = null;
+    let fallbackTimer = null;
 
     function hideLoader() {
-        if (finished) return;
 
-        finished = true;
+        if (loaderClosed) return;
 
-        clearInterval(progressInterval);
+        loaderClosed = true;
+
+        clearInterval(progressTimer);
+        clearTimeout(fallbackTimer);
 
         if (progressBar) {
             progressBar.style.width = "100%";
@@ -68,38 +101,52 @@ document.addEventListener("keydown", function(event) {
 
         loader.classList.add("loader-hidden");
 
+        document.body.style.overflow = "";
+
         setTimeout(function () {
-            loader.remove();
+
+            if (loader.parentNode) {
+                loader.remove();
+            }
+
         }, 750);
+
     }
 
-    // Animate progress while the page loads
-    progressInterval = setInterval(function () {
+    // Animate progress bar
+    progressTimer = setInterval(function () {
+
         if (progress < 90) {
-            progress += Math.random() * 8;
-            progress = Math.min(progress, 90);
+
+            progress = Math.min(progress + 3, 90);
 
             if (progressBar) {
                 progressBar.style.width = progress + "%";
             }
-        }
-    }, 180);
 
-    // Hide after the complete page has loaded
-    window.addEventListener("load", function () {
-        if (progressBar) {
-            progressBar.style.width = "100%";
         }
 
-        setTimeout(hideLoader, 500);
-    });
+    }, 150);
 
     // Skip button
     if (skipButton) {
         skipButton.addEventListener("click", hideLoader);
     }
 
-    // Safety fallback if loading takes too long
-    setTimeout(hideLoader, 12000);
+    // Hide when page and its resources finish loading
+    if (document.readyState === "complete") {
 
-})();
+        setTimeout(hideLoader, 500);
+
+    } else {
+
+        window.addEventListener("load", function () {
+            setTimeout(hideLoader, 500);
+        }, { once: true });
+
+    }
+
+    // Emergency fallback
+    fallbackTimer = setTimeout(hideLoader, 8000);
+
+});
