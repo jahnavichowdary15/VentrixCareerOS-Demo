@@ -39,18 +39,67 @@ document.addEventListener("keydown", function(event) {
         hideLaunchPopup();
     }
 });
-// VentrixCareerOS Loading Screen
-window.addEventListener("load", function () {
+
+/* ======================================
+   VENTRIX CAREEROS LOADING CONTROLLER
+====================================== */
+
+(function () {
     const loader = document.getElementById("pageLoader");
+    const skipButton = document.getElementById("skipLoader");
+    const progressBar = document.getElementById("loadingProgressBar");
 
-    if (loader) {
+    if (!loader) return;
+
+    let finished = false;
+    let progress = 0;
+    let progressInterval;
+
+    function hideLoader() {
+        if (finished) return;
+
+        finished = true;
+
+        clearInterval(progressInterval);
+
+        if (progressBar) {
+            progressBar.style.width = "100%";
+        }
+
+        loader.classList.add("loader-hidden");
+
         setTimeout(function () {
-            loader.classList.add("loader-hidden");
-
-            setTimeout(function () {
-                loader.remove();
-            }, 650);
-
-        }, 1000);
+            loader.remove();
+        }, 750);
     }
-});
+
+    // Animate progress while the page loads
+    progressInterval = setInterval(function () {
+        if (progress < 90) {
+            progress += Math.random() * 8;
+            progress = Math.min(progress, 90);
+
+            if (progressBar) {
+                progressBar.style.width = progress + "%";
+            }
+        }
+    }, 180);
+
+    // Hide after the complete page has loaded
+    window.addEventListener("load", function () {
+        if (progressBar) {
+            progressBar.style.width = "100%";
+        }
+
+        setTimeout(hideLoader, 500);
+    });
+
+    // Skip button
+    if (skipButton) {
+        skipButton.addEventListener("click", hideLoader);
+    }
+
+    // Safety fallback if loading takes too long
+    setTimeout(hideLoader, 12000);
+
+})();
