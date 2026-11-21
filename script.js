@@ -147,6 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Emergency fallback
-    fallbackTimer = setTimeout(hideLoader, 5000);
+    fallbackTimer = setTimeout(hideLoader, 2000);
 
 });
