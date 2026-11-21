@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (loader) {
 
-        const MIN_LOADING_TIME = 3000;
+        const MIN_LOADING_TIME = 5000;
         const START_TIME = Date.now();
 
         let finished = false;
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (loader.parentNode) {
                     loader.remove();
                 }
-            }, 5000);
+            }, 750);
         }
 
         function updateProgress() {
